@@ -5,6 +5,8 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from django.db import transaction
 from django.utils import timezone
+from django.contrib.auth import get_user_model
+
 
 from .models import TokenBalance, UserBalance, BuyOrder, SellOrder, Transaction
 from .serializers import (
@@ -13,6 +15,7 @@ from .serializers import (
     OrderBookSerializer
 )
 
+User = get_user_model()
 
 class TokenBalanceView(APIView):
     """
@@ -51,6 +54,14 @@ class BuyOrderView(APIView):
         
         username = serializer.validated_data['username']
         quantity = serializer.validated_data['quantity']
+        try:
+         user = User.objects.get(username=username)
+        except User.DoesNotExist:
+           return Response(
+            {"error": "کاربری با این نام کاربری وجود ندارد."},
+             status=status.HTTP_400_BAD_REQUEST
+    )
+
         
         with transaction.atomic():
             # ایجاد سفارش خرید با وضعیت pending
@@ -137,6 +148,14 @@ class SellOrderView(APIView):
         
         username = serializer.validated_data['username']
         quantity = serializer.validated_data['quantity']
+        try:
+         user = User.objects.get(username=username)
+        except User.DoesNotExist:
+           return Response(
+            {"error": "کاربری با این نام کاربری وجود ندارد."},
+             status=status.HTTP_400_BAD_REQUEST
+    )
+
         
         with transaction.atomic():
             # بررسی موجودی کافی کاربر

@@ -9,7 +9,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     سریالایزر ثبت‌نام کاربر
     """
     password = serializers.CharField(write_only=True, min_length=6)
-    confirm_password = serializers.CharField(write_only=True)
+    
     phone_number = serializers.CharField(
         required=False, 
         allow_blank=True,
@@ -24,18 +24,14 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password', 'confirm_password', 'first_name', 'last_name', 'phone_number']
+        fields = ['username', 'email', 'password', 'first_name', 'last_name', 'phone_number']
         extra_kwargs = {
             'phone_number': {'required': False, 'allow_blank': True}
         }
     
-    def validate(self, data):
-        if data['password'] != data['confirm_password']:
-            raise serializers.ValidationError("رمز عبور و تکرار آن یکسان نیستند")
-        return data
-    
+   
     def create(self, validated_data):
-        validated_data.pop('confirm_password')
+       
         user = CustomUser.objects.create_user(**validated_data)
         return user
 
