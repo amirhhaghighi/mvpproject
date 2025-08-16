@@ -14,6 +14,7 @@ class TestProcessRequestSerializer(serializers.Serializer):
     end_time = serializers.TimeField(help_text='ساعت پایان (HH:MM)')
     test_date = serializers.DateField(help_text='تاریخ تست (YYYY-MM-DD)', required=False, default=date.today)
 
+
     def validate(self, data):
         """
         اعتبارسنجی بازه زمانی
@@ -57,3 +58,42 @@ class TestProcessResponseSerializer(serializers.ModelSerializer):
             'username', 'test_name', 'test_duration', 
             'time_slots', 'total_slots', 'total_reservations'
         ]
+class TestProcessWithGymRequestSerializer(serializers.Serializer):
+    """
+    سریالایزر برای درخواست پردازش تست با مشخص کردن باشگاه
+    """
+    username = serializers.CharField(max_length=150, help_text='نام کاربری')
+    test_name = serializers.CharField(max_length=100, help_text='نام تست')
+    gym_name = serializers.CharField(max_length=100, help_text='نام باشگاه')  # فیلد جدید
+    start_time = serializers.TimeField(help_text='ساعت شروع (HH:MM)')
+    end_time = serializers.TimeField(help_text='ساعت پایان (HH:MM)')
+    test_date = serializers.DateField(help_text='تاریخ تست (YYYY-MM-DD)', required=False, default=date.today)
+
+    def validate(self, data):
+        """
+        اعتبارسنجی بازه زمانی
+        """
+        start_time = data.get('start_time')
+        end_time = data.get('end_time')
+        
+        if start_time >= end_time:
+            raise serializers.ValidationError("ساعت شروع باید قبل از ساعت پایان باشد")
+        
+        return data
+    
+    def validate_test_name(self, value):
+        """
+        اعتبارسنجی وجود تست
+        """
+        if not SportTest.objects.filter(name=value).exists():
+            raise serializers.ValidationError("تست با این نام یافت نشد")
+        return value
+    
+    def validate_gym_name(self, value):
+        """
+        اعتبارسنجی وجود باشگاه
+        """
+        from gyms.models import Gym
+        if not Gym.objects.filter(name=value).exists():
+            raise serializers.ValidationError("باشگاه با این نام یافت نشد")
+        return value
