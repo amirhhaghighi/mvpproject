@@ -24,7 +24,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password', 'first_name', 'last_name', 'phone_number']
+        fields = ['username',  'password', 'first_name', 'last_name', 'phone_number']
         extra_kwargs = {
             'phone_number': {'required': False, 'allow_blank': True}
         }
@@ -69,10 +69,9 @@ class UserUpdateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'first_name', 'last_name', 'phone_number']
+        fields = ['username', 'first_name', 'last_name', 'phone_number']
         extra_kwargs = {
             'username': {'required': False},
-            'email': {'required': False},
             'phone_number': {'required': False, 'allow_blank': True}
         }
 
@@ -83,5 +82,5 @@ class UserDetailSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'phone_number', 'date_joined']
+        fields = ['id', 'username','first_name', 'last_name', 'phone_number', 'date_joined']
         read_only_fields = ['id', 'date_joined']
