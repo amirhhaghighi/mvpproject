@@ -44,6 +44,7 @@ class GymDetailView(generics.RetrieveAPIView):
     permission_classes = [AllowAny]
     queryset = Gym.objects.all()
     serializer_class = GymDetailSerializer
+    lookup_field = 'name'
 
 
 class GymUpdateView(APIView):
@@ -52,9 +53,9 @@ class GymUpdateView(APIView):
     """
     permission_classes = [AllowAny]
     
-    def put(self, request, gym_id):
+    def put(self, request, name):
         try:
-            gym = Gym.objects.get(id=gym_id)
+            gym = Gym.objects.get(name=name)
             serializer = GymUpdateSerializer(gym, data=request.data, partial=True)
             if serializer.is_valid():
                 serializer.save()

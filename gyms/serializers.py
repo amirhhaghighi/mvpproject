@@ -8,7 +8,7 @@ class GymSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Gym
-        fields = ['id', 'name', 'phone', 'address', 'owner', 'created_at']
+        fields = ['id', 'name', 'phone', 'address', 'owner',' account_number', 'created_at']
 
 
 class GymCreateSerializer(serializers.ModelSerializer):
@@ -17,7 +17,7 @@ class GymCreateSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Gym
-        fields = ['name', 'phone', 'address', 'owner']
+        fields = ['name', 'phone', 'address','account_number', 'owner']
 
 
 class GymUpdateSerializer(serializers.ModelSerializer):
@@ -26,7 +26,7 @@ class GymUpdateSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Gym
-        fields = ['name', 'phone', 'address', 'owner']
+        fields = ['name', 'phone', 'address','account_number', 'owner']
 
 
 class GymDetailSerializer(serializers.ModelSerializer):
@@ -37,7 +37,7 @@ class GymDetailSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Gym
-        fields = ['id', 'name', 'phone', 'address', 'owner', 'created_at', 'updated_at', 'timeslots_count']
+        fields = ['id', 'name', 'phone', 'address','account_number', 'owner', 'created_at', 'updated_at', 'timeslots_count']
     
     def get_timeslots_count(self, obj):
         return obj.timeslots.count()

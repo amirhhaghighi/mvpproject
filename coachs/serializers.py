@@ -20,7 +20,7 @@ class CoachSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Coach
-        fields = ['id', 'first_name', 'last_name', 'specialties', 'phone_number', 'schedules', 'created_at', 'updated_at']
+        fields = ['id', 'first_name', 'last_name','username', 'specialties', 'phone_number', 'schedules', 'created_at', 'updated_at']
         read_only_fields = ['id', 'created_at', 'updated_at']
 
 
@@ -30,7 +30,7 @@ class CoachCreateSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Coach
-        fields = ['first_name', 'last_name', 'specialties', 'phone_number']
+        fields = ['first_name', 'last_name','username', 'specialties', 'phone_number','account_number']
 
 
 class CoachUpdateSerializer(serializers.ModelSerializer):
@@ -39,7 +39,7 @@ class CoachUpdateSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Coach
-        fields = ['first_name', 'last_name', 'specialties', 'phone_number']
+        fields = ['first_name', 'last_name','username', 'specialties', 'phone_number','account_number']
         extra_kwargs = {
             'first_name': {'required': False},
             'last_name': {'required': False},
@@ -56,7 +56,7 @@ class CoachDetailSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Coach
-        fields = ['id', 'first_name', 'last_name', 'specialties', 'phone_number', 'schedules', 'created_at', 'updated_at']
+        fields = ['id', 'first_name', 'last_name','username', 'specialties', 'phone_number', 'schedules', 'created_at','account_number', 'updated_at']
         read_only_fields = ['id', 'created_at', 'updated_at']
 
 

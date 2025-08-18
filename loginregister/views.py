@@ -25,7 +25,7 @@ class UserRegistrationView(APIView):
         if serializer.is_valid():
             user = serializer.save()
             return Response({
-                'message': 'ثبت‌نام با موفقیت انجام شد',
+                'message': ' موفق بود . موحودی کاربر را تعیین کن',
                 'user_id': user.id
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -43,7 +43,7 @@ class UserLoginView(APIView):
             user = serializer.validated_data['user']
             login(request, user)
             return Response({
-                'message': 'ورود موفقیت‌آمیز بود',
+                'message': 'موفق بود',
                 'user_id': user.id,
                 'username': user.username
             }, status=status.HTTP_200_OK)
@@ -79,6 +79,8 @@ class UserDetailView(generics.RetrieveAPIView):
     permission_classes = [AllowAny]  # همه می‌توانند جزئیات کاربران را ببینند
     queryset = CustomUser.objects.all()
     serializer_class = UserDetailSerializer
+    lookup_field = 'username' 
+
 
 
 class UserUpdateView(APIView):
@@ -87,9 +89,9 @@ class UserUpdateView(APIView):
     """
     permission_classes = [AllowAny]  # همه می‌توانند کاربران را آپدیت کنند
     
-    def put(self, request, user_id):
+    def put(self, request, username):
         try:
-            user = CustomUser.objects.get(id=user_id)
+            user = CustomUser.objects.get(username=username)
             serializer = UserUpdateSerializer(user, data=request.data, partial=True)
             if serializer.is_valid():
                 serializer.save()

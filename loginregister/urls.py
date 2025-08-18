@@ -9,8 +9,8 @@ urlpatterns = [
     path('api/login/', views.UserLoginView.as_view(), name='api_login'),
     path('api/logout/', views.UserLogoutView.as_view(), name='api_logout'),
     path('api/users/', views.UserListView.as_view(), name='api_users'),
-    path('api/users/<int:user_id>/', views.UserDetailView.as_view(), name='api_user_detail'),
-    path('api/users/<int:user_id>/update/', views.UserUpdateView.as_view(), name='api_user_update'),
+    path('api/users/<str:username>/', views.UserDetailView.as_view(), name='api_user_detail'),
+    path('api/users/<str:username>/update/', views.UserUpdateView.as_view(), name='api_user_update'),
     path('api/users/<int:user_id>/delete/', views.UserDeleteView.as_view(), name='api_user_delete'),
     
     # Web interface pages

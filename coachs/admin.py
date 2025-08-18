@@ -7,7 +7,7 @@ class CoachAdmin(admin.ModelAdmin):
     """
     پنل ادمین برای مربیان
     """
-    list_display = ('first_name', 'last_name', 'specialties', 'phone_number', 'created_at')
+    list_display = ('first_name', 'last_name','account_number','username', 'specialties', 'phone_number', 'created_at')
     list_filter = ('created_at',)
     search_fields = ('first_name', 'last_name', 'specialties', 'phone_number')
     ordering = ('-created_at',)

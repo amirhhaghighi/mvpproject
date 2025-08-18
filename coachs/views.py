@@ -46,6 +46,8 @@ class CoachDetailView(generics.RetrieveAPIView):
     permission_classes = [AllowAny]
     queryset = Coach.objects.all()
     serializer_class = CoachDetailSerializer
+    lookup_field = 'username'
+
 
 
 class CoachUpdateView(APIView):
@@ -54,9 +56,9 @@ class CoachUpdateView(APIView):
     """
     permission_classes = [AllowAny]
     
-    def put(self, request, coach_id):
+    def put(self, request,username):
         try:
-            coach = Coach.objects.get(id=coach_id)
+            coach = Coach.objects.get(username=username)
             serializer = CoachUpdateSerializer(coach, data=request.data, partial=True)
             if serializer.is_valid():
                 serializer.save()

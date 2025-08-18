@@ -7,8 +7,8 @@ urlpatterns = [
     # باشگاه‌ها
     path('gym/list/', views.GymListView.as_view(), name='gym_list'),
     path('gym/create/', views.GymCreateView.as_view(), name='gym_create'),
-    path('gym/<int:pk>/detail/', views.GymDetailView.as_view(), name='gym_detail'),
-    path('gym/<int:pk>/update/', views.GymUpdateView.as_view(), name='gym_update'),
+    path('gym/<str:name>/detail/', views.GymDetailView.as_view(), name='gym_detail'),
+    path('gym/<str:name>/update/', views.GymUpdateView.as_view(), name='gym_update'),
     path('gym/<int:pk>/delete/', views.GymDeleteView.as_view(), name='gym_delete'),
     
     # بازه‌های زمانی

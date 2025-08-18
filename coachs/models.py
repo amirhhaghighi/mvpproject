@@ -8,7 +8,9 @@ class Coach(models.Model):
     """
     first_name = models.CharField(max_length=50, verbose_name="نام")
     last_name = models.CharField(max_length=50, verbose_name="نام خانوادگی")
+    username = models.CharField(max_length=50,verbose_name="نام کاربری",default="guest" )
     specialties = models.TextField(verbose_name="رشته‌های تخصصی")
+    account_number = models.CharField(max_length=30, blank=True, null=True, verbose_name="شماره حساب") 
     phone_number = models.CharField(max_length=15, verbose_name="شماره تماس")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="تاریخ بروزرسانی")

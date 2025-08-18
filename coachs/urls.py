@@ -7,9 +7,9 @@ urlpatterns = [
     # مربیان
     path('coach/list/', views.CoachListView.as_view(), name='coach_list'),
     path('coach/create/', views.CoachCreateView.as_view(), name='coach_create'),
-    path('coach/<int:coach_id>/detail/', views.CoachDetailView.as_view(), name='coach_detail'),
-    path('coach/<int:coach_id>/update/', views.CoachUpdateView.as_view(), name='coach_update'),
-    path('coach/<int:coach_id>/delete/', views.CoachDeleteView.as_view(), name='coach_delete'),
+    path('coach/<str:username>/detail/', views.CoachDetailView.as_view(), name='coach_detail'),
+    path('coach/<str:username>/update/', views.CoachUpdateView.as_view(), name='coach_update'),
+    path('coach/<str:username>/delete/', views.CoachDeleteView.as_view(), name='coach_delete'),
     
     # برنامه‌های زمانی
     path('coach/<int:coach_id>/schedule/', views.CoachScheduleListView.as_view(), name='coach_schedule_list'),

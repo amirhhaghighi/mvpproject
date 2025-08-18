@@ -10,6 +10,7 @@ class Gym(models.Model):
     phone = models.CharField(max_length=15, verbose_name='شماره تماس')
     address = models.TextField(verbose_name='آدرس')
     owner = models.CharField(max_length=100, verbose_name='صاحب باشگاه')
+    account_number = models.CharField(max_length=30, blank=True, null=True, verbose_name="شماره حساب") 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ بروزرسانی')
 

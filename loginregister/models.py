@@ -8,6 +8,7 @@ class CustomUser(AbstractUser):
     """
     phone_number = models.CharField(max_length=15, blank=True, null=True, verbose_name="شماره تلفن")
     email = models.EmailField(blank=True, null=True, unique=False, verbose_name="ایمیل")
+    account_number = models.CharField(max_length=30, blank=True, null=True, verbose_name="شماره حساب")
 
     class Meta:
         verbose_name = "کاربر"
